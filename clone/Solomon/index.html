@@ -1,0 +1,225 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Section & Adviser Assignment System</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="auth-shell" id="loginView">
+    <section class="login-card">
+      <div class="login-brand">
+        <p class="kicker">MNCHS Portal</p>
+        <h1>Section & Adviser Assignment System</h1>
+        <p class="subtitle">Sign in to access section assignment records and management tools.</p>
+      </div>
+
+      <form id="loginForm" class="login-form" autocomplete="off">
+        <label for="loginUsername">Username</label>
+        <input id="loginUsername" type="text" placeholder="Enter username" required />
+
+        <label for="loginPassword">Password</label>
+        <input id="loginPassword" type="password" placeholder="Enter password" required />
+
+        <button class="btn btn-primary login-btn" type="submit">Login</button>
+        <p id="loginError" class="login-error" aria-live="polite"></p>
+      </form>
+    </section>
+  </main>
+
+  <main class="container hidden" id="appView">
+    <section class="hero">
+      <div>
+        <h1>Section & Adviser Assignment System</h1>
+        <p><strong>Purpose:</strong> Manage sections and teacher assignments.</p>
+      </div>
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="value" id="statSections">0</span>
+          <span class="label">Total Sections</span>
+        </div>
+        <div class="stat">
+          <span class="value" id="statAssigned">0</span>
+          <span class="label">Assigned</span>
+        </div>
+        <div class="stat">
+          <span class="value" id="statGrades">0</span>
+          <span class="label">Grade Levels</span>
+        </div>
+        <div class="stat">
+          <span class="value" id="currentRole">USER</span>
+          <span class="label">Current Role</span>
+        </div>
+        <button class="btn btn-ghost logout-btn" id="logoutBtn" type="button">Logout</button>
+      </div>
+    </section>
+
+    <p id="accessBanner" class="access-banner hidden"></p>
+
+    <section class="layout">
+      <article class="card">
+        <div class="card-head">
+          <h2>Workflow Overview</h2>
+          <p>Main features and project activity list.</p>
+        </div>
+        <div class="card-body split">
+          <div>
+            <h2 style="font-size:0.95rem;color:var(--maroon);margin-bottom:0.4rem;">Main Features</h2>
+            <ul class="feature-list">
+              <li><span class="badge">1</span><span>Create section</span></li>
+              <li><span class="badge">2</span><span>Assign adviser</span></li>
+              <li><span class="badge">3</span><span>View section list</span></li>
+              <li><span class="badge">4</span><span>Edit assignment</span></li>
+            </ul>
+          </div>
+          <div>
+            <h2 style="font-size:0.95rem;color:var(--maroon);margin-bottom:0.4rem;">Activity</h2>
+            <ul class="activity-list">
+              <li><span class="badge">✓</span><span>Design section structure per grade level</span></li>
+              <li><span class="badge">✓</span><span>Create ERD</span></li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <section class="split">
+        <article class="card">
+          <div class="card-head">
+            <h2>Section & Adviser Management</h2>
+            <p id="managementHint">Add or edit records with real-time updates.</p>
+          </div>
+          <div class="card-body">
+            <form id="sectionForm" autocomplete="off">
+              <div class="row">
+                <div>
+                  <label for="gradeLevel">Grade Level</label>
+                  <select id="gradeLevel" required>
+                    <option value="">Select grade</option>
+                    <option>Grade 7</option>
+                    <option>Grade 8</option>
+                    <option>Grade 9</option>
+                    <option>Grade 10</option>
+                    <option>Grade 11</option>
+                    <option>Grade 12</option>
+                  </select>
+                </div>
+                <div>
+                  <label for="sectionName">Section Name</label>
+                  <input id="sectionName" type="text" maxlength="40" placeholder="e.g., Marigold" required />
+                </div>
+              </div>
+
+              <div class="row">
+                <div>
+                  <label for="adviserName">Adviser</label>
+                  <input id="adviserName" type="text" maxlength="60" placeholder="Leave blank if unassigned" />
+                </div>
+                <div>
+                  <label for="capacity">Capacity</label>
+                  <input id="capacity" type="number" min="1" max="120" placeholder="45" />
+                </div>
+              </div>
+
+              <div class="actions">
+                <button class="btn btn-primary" id="submitBtn" type="submit">Add Section</button>
+                <button class="btn btn-ghost" id="cancelEditBtn" type="button">Cancel Edit</button>
+              </div>
+            </form>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-head">
+            <h2>ERD (Concept)</h2>
+            <p>Core tables for section and adviser assignment.</p>
+          </div>
+          <div class="card-body erd">
+            <svg viewBox="0 0 690 350" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ERD">
+              <defs>
+                <marker id="arrow" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto">
+                  <path d="M0,0 L0,7 L8,3.5 z" fill="#6f6f6f"/>
+                </marker>
+              </defs>
+
+              <rect class="bx hd" x="20" y="24" width="190" height="42" />
+              <text class="tx" x="72" y="50">GRADE_LEVEL</text>
+              <rect class="bx" x="20" y="66" width="190" height="98" />
+              <text class="tx" x="34" y="90">PK grade_id</text>
+              <text class="tx" x="34" y="113">grade_name</text>
+              <text class="tx" x="34" y="136">school_year</text>
+              <text class="tx" x="34" y="158">display_order</text>
+
+              <rect class="bx hd" x="248" y="146" width="190" height="42" />
+              <text class="tx" x="315" y="172">SECTION</text>
+              <rect class="bx" x="248" y="188" width="190" height="126" />
+              <text class="tx" x="261" y="212">PK section_id</text>
+              <text class="tx" x="261" y="235">section_name</text>
+              <text class="tx" x="261" y="258">FK grade_id</text>
+              <text class="tx" x="261" y="281">capacity</text>
+              <text class="tx" x="261" y="304">status</text>
+
+              <rect class="bx hd" x="478" y="24" width="190" height="42" />
+              <text class="tx" x="544" y="50">TEACHER</text>
+              <rect class="bx" x="478" y="66" width="190" height="98" />
+              <text class="tx" x="492" y="90">PK teacher_id</text>
+              <text class="tx" x="492" y="113">full_name</text>
+              <text class="tx" x="492" y="136">specialization</text>
+              <text class="tx" x="492" y="158">is_active</text>
+
+              <line class="ln" x1="210" y1="110" x2="248" y2="212" />
+              <text class="tx" x="198" y="133">1</text>
+              <text class="tx" x="236" y="195">N</text>
+
+              <line class="ln" x1="478" y1="110" x2="438" y2="214" />
+              <text class="tx" x="460" y="132">1</text>
+              <text class="tx" x="442" y="194">N</text>
+            </svg>
+          </div>
+        </article>
+      </section>
+
+      <article class="card">
+        <div class="card-head">
+          <h2>Section List</h2>
+          <p>Filter, search, and maintain assignments per grade level.</p>
+        </div>
+        <div class="card-body">
+          <div class="toolbar">
+            <input id="searchInput" type="search" placeholder="Search section or adviser..." />
+            <select id="filterGrade">
+              <option value="">All Grades</option>
+              <option>Grade 7</option>
+              <option>Grade 8</option>
+              <option>Grade 9</option>
+              <option>Grade 10</option>
+              <option>Grade 11</option>
+              <option>Grade 12</option>
+            </select>
+            <button class="btn btn-ghost" type="button" id="clearDataBtn">Clear All Data</button>
+          </div>
+
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Grade</th>
+                  <th>Section</th>
+                  <th>Adviser</th>
+                  <th>Capacity</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="sectionRows"></tbody>
+            </table>
+          </div>
+          <p class="muted" id="emptyText">No section records yet. Add your first section above.</p>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
